@@ -1,5 +1,4 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using Perceptron.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +14,19 @@ namespace Perceptron
 {
     public partial class Perceptron : Form
     {
-        private static List<double> puntosX = new List<double>();
-        private static List<double> puntosY = new List<double>();
-        private static List<double> puntosXN = new List<double>();
-        private static List<double> puntosYN = new List<double>();
+        private static readonly Random random = new Random();
+        private double w0 = (double)random.NextDouble();
+        private double w1 = (double)random.NextDouble();
+        private double w2 = (double)random.NextDouble();
 
-        private readonly static Percep perceptron = new Percep();
+        private readonly double factorAprendizaje = 0.4;
+        private readonly int epocas = 500;
+
+
+        private List<double> puntosX = new List<double>();
+        private List<double> puntosY = new List<double>();
+        private List<double> salidasDeseadas = new List<double>();
+
 
         public Perceptron()
         {
@@ -51,8 +57,7 @@ namespace Perceptron
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            perceptron.Entrenamiento();
-
+            Entrenamiento();
             return;
         }
 
@@ -60,8 +65,52 @@ namespace Perceptron
         {
             puntosX.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
             puntosY.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
+            if (cbxCero.Checked)
+            {
+                salidasDeseadas.Add(0);
+            }
+            else
+            {
+                salidasDeseadas.Add(1);
+            }
 
             chart2.Series[3].Points.AddXY(puntosX.Last(), puntosY.Last());
         }
+
+        private void cbxCero_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbxUno.Checked = false;
+            cbxCero.Checked = true;
+        }
+
+        private void cbxUno_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbxUno.Checked = true;
+            cbxCero.Checked = false;
+        }
+        #region Perceptron
+        private void Entrenamiento()
+        {
+            ;
+            for (int i = 0; i < epocas; i++)
+            {
+                for (int j = 0; j < puntosX.Count; j++)
+                {
+                    var y = (w0 * 1) + (w1 * puntosX[j]) + (w2 * puntosY[j]);
+                    y = y >= 0 ? 1 : -1;
+                    var error = salidasDeseadas[j] - (y);
+                    if (error != 0)
+                    {
+                        w0 += (factorAprendizaje * (error) * 1);
+                        w1 += (factorAprendizaje * (error) * puntosX[j]);
+                        w2 += (factorAprendizaje * (error) * puntosY[j]);
+                        break;
+                    }
+                    continue;
+                }
+            }
+        }
+
+        #endregion
     }
 }

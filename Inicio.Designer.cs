@@ -37,6 +37,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Perceptron));
             this.btnIngresar = new System.Windows.Forms.Button();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.cbxCero = new System.Windows.Forms.CheckBox();
+            this.cbxUno = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             this.btnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIngresar.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.btnIngresar.Location = new System.Drawing.Point(68, 202);
+            this.btnIngresar.Location = new System.Drawing.Point(59, 267);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(128, 46);
             this.btnIngresar.TabIndex = 1;
@@ -107,12 +109,45 @@
             this.chart2.Text = "chart1";
             this.chart2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart2_MouseClick);
             // 
+            // cbxCero
+            // 
+            this.cbxCero.AutoSize = true;
+            this.cbxCero.Checked = true;
+            this.cbxCero.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxCero.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbxCero.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxCero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
+            this.cbxCero.Location = new System.Drawing.Point(81, 91);
+            this.cbxCero.Name = "cbxCero";
+            this.cbxCero.Size = new System.Drawing.Size(91, 29);
+            this.cbxCero.TabIndex = 3;
+            this.cbxCero.Text = "Valor 0";
+            this.cbxCero.UseVisualStyleBackColor = true;
+            this.cbxCero.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxCero_MouseClick);
+            // 
+            // cbxUno
+            // 
+            this.cbxUno.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.cbxUno.AutoSize = true;
+            this.cbxUno.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbxUno.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxUno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
+            this.cbxUno.Location = new System.Drawing.Point(81, 145);
+            this.cbxUno.Name = "cbxUno";
+            this.cbxUno.Size = new System.Drawing.Size(88, 29);
+            this.cbxUno.TabIndex = 4;
+            this.cbxUno.Text = "Valor 1";
+            this.cbxUno.UseVisualStyleBackColor = true;
+            this.cbxUno.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxUno_MouseClick);
+            // 
             // Perceptron
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(24)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(812, 458);
+            this.Controls.Add(this.cbxUno);
+            this.Controls.Add(this.cbxCero);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.btnIngresar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -127,6 +162,8 @@
         #endregion
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.CheckBox cbxCero;
+        private System.Windows.Forms.CheckBox cbxUno;
     }
 }
 
