@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -18,6 +19,7 @@ namespace Perceptron
         private double w0 = (double)random.NextDouble();
         private double w1 = (double)random.NextDouble();
         private double w2 = (double)random.NextDouble();
+        private readonly int bias = 1;
 
         private readonly double factorAprendizaje = 0.4;
         private readonly int epocas = 500;
@@ -91,23 +93,46 @@ namespace Perceptron
         #region Perceptron
         private void Entrenamiento()
         {
-            ;
             for (int i = 0; i < epocas; i++)
             {
                 for (int j = 0; j < puntosX.Count; j++)
                 {
-                    var y = (w0 * 1) + (w1 * puntosX[j]) + (w2 * puntosY[j]);
+                    var y = (w0 * bias) + (w1 * puntosX[j]) + (w2 * puntosY[j]);
                     y = y >= 0 ? 1 : -1;
                     var error = salidasDeseadas[j] - (y);
                     if (error != 0)
                     {
-                        w0 += (factorAprendizaje * (error) * 1);
+                        Graficar();
+                        Thread.Sleep(5000);
+                        w0 += (factorAprendizaje * (error) * bias);
                         w1 += (factorAprendizaje * (error) * puntosX[j]);
                         w2 += (factorAprendizaje * (error) * puntosY[j]);
                         break;
                     }
                     continue;
                 }
+            }
+        }
+
+        private void Graficar()
+        {
+            for (int i = 0; i < puntosX.Count; i++)
+            {
+                if((w0 * bias) + (w1 * puntosX[i]) + (w2 * puntosY[i]) >= 0)
+                {
+                    chart2.Series[0].Points.AddXY(puntosX[i], puntosY[i]);
+                }
+                else
+                {
+                    chart2.Series[1].Points.AddXY(puntosX[i], puntosY[i]);
+                }
+
+                var y1 = (-bias - w1 * (puntosX.Min()) / w2);
+                var y2 = (-bias - w1 * (puntosX.Max()) / w2);
+
+                chart2.Series[2].Points.Clear();
+                chart2.Series[2].Points.AddXY(puntosX.Min(), y1);
+                chart2.Series[2].Points.AddXY(puntosX.Max(), y2);
             }
         }
 
