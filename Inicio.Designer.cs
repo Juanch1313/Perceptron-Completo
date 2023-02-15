@@ -40,6 +40,7 @@
             this.cbxCero = new System.Windows.Forms.CheckBox();
             this.cbxUno = new System.Windows.Forms.CheckBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.lbTexto = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@
             this.cbxCero.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbxCero.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxCero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.cbxCero.Location = new System.Drawing.Point(81, 91);
+            this.cbxCero.Location = new System.Drawing.Point(72, 140);
             this.cbxCero.Name = "cbxCero";
             this.cbxCero.Size = new System.Drawing.Size(91, 29);
             this.cbxCero.TabIndex = 3;
@@ -133,7 +134,7 @@
             this.cbxUno.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbxUno.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxUno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.cbxUno.Location = new System.Drawing.Point(81, 145);
+            this.cbxUno.Location = new System.Drawing.Point(72, 194);
             this.cbxUno.Name = "cbxUno";
             this.cbxUno.Size = new System.Drawing.Size(88, 29);
             this.cbxUno.TabIndex = 4;
@@ -157,12 +158,23 @@
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // lbTexto
+            // 
+            this.lbTexto.AutoSize = true;
+            this.lbTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTexto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
+            this.lbTexto.Location = new System.Drawing.Point(24, 12);
+            this.lbTexto.Name = "lbTexto";
+            this.lbTexto.Size = new System.Drawing.Size(0, 20);
+            this.lbTexto.TabIndex = 6;
+            // 
             // Perceptron
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(24)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(812, 458);
+            this.Controls.Add(this.lbTexto);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.cbxUno);
             this.Controls.Add(this.cbxCero);
@@ -183,6 +195,7 @@
         private System.Windows.Forms.CheckBox cbxCero;
         private System.Windows.Forms.CheckBox cbxUno;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Label lbTexto;
     }
 }
 

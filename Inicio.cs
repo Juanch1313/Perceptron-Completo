@@ -23,7 +23,7 @@ namespace Perceptron
         private readonly int bias = 1;
 
         private readonly double factorAprendizaje = 0.4f;
-        private readonly int epocas = 500;
+        private readonly int epocas = 100;
 
 
         private List<double> puntosX = new List<double>();
@@ -64,6 +64,8 @@ namespace Perceptron
             chart2.Series[1].Color = Color.Red;
             chart2.Series[2].Color = Color.Black;
             chart2.Series[3].Color = Color.Blue;
+
+            lbTexto.Text = "Primero dame los valores \n con los que entrenare";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -73,18 +75,21 @@ namespace Perceptron
                 cbxCero.Visible = false;
                 cbxUno.Visible = false;
 
+                lbTexto.Text = "Entrenando...";
+
                 w0 = random.NextDouble();
                 w1 = random.NextDouble();
                 w2 = random.NextDouble();
                 Entrenamiento();
                 bandera = true;
+                lbTexto.Text = "Ya estoy entrenad@ \n puedes ingresar valores y \n yo los clasificare";
             }
             else
             {
                 chart2.Series[3].Points.Clear();
                 for (int i = 0; i < puntosXNuevos.Count; i++)
                 {
-                    if((w0 * bias) + (w1 * puntosXNuevos[i]) + (w2 * puntosYNuevos[i]) >= 0)
+                    if((w0 * bias) + (w1 * puntosXNuevos[i]) + (w2 * puntosYNuevos[i]) >= 0.5)
                     {
                         chart2.Series[0].Points.AddXY(puntosXNuevos[i], puntosYNuevos[i]);
                     }
@@ -146,7 +151,7 @@ namespace Perceptron
                     if (error != 0)
                     {
                         Graficar();
-                        this.Refresh();
+                        Refresh();
                         w0 += (factorAprendizaje * (error) * bias);
                         w1 += (factorAprendizaje * (error) * puntosX[j]);
                         w2 += (factorAprendizaje * (error) * puntosY[j]);
@@ -164,7 +169,7 @@ namespace Perceptron
             chart2.Series[3].Points.Clear();
             for (int i = 0; i < puntosX.Count; i++)
             {
-                if((w0 * bias) + (w1 * puntosX[i]) + (w2 * puntosY[i]) >= 0)
+                if((w0 * bias) + (w1 * puntosX[i]) + (w2 * puntosY[i]) >= 0.5)
                 {
                     chart2.Series[0].Points.AddXY(puntosX[i], puntosY[i]);
                 }
