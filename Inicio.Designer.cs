@@ -39,6 +39,7 @@
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cbxCero = new System.Windows.Forms.CheckBox();
             this.cbxUno = new System.Windows.Forms.CheckBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,6 +128,8 @@
             // 
             this.cbxUno.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
             this.cbxUno.AutoSize = true;
+            this.cbxUno.Checked = true;
+            this.cbxUno.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbxUno.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbxUno.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxUno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
@@ -138,12 +141,29 @@
             this.cbxUno.UseVisualStyleBackColor = true;
             this.cbxUno.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxUno_MouseClick);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.AutoSize = true;
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(51)))), ((int)(((byte)(47)))));
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
+            this.btnLimpiar.Location = new System.Drawing.Point(59, 400);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(128, 46);
+            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // Perceptron
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(24)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(812, 458);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.cbxUno);
             this.Controls.Add(this.cbxCero);
             this.Controls.Add(this.chart2);
@@ -162,6 +182,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.CheckBox cbxCero;
         private System.Windows.Forms.CheckBox cbxUno;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }
 

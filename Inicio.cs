@@ -70,6 +70,9 @@ namespace Perceptron
         {
             if (!bandera)
             {
+                cbxCero.Visible = false;
+                cbxUno.Visible = false;
+
                 w0 = random.NextDouble();
                 w1 = random.NextDouble();
                 w2 = random.NextDouble();
@@ -178,5 +181,27 @@ namespace Perceptron
         }
 
         #endregion
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            chart2.Series[0].Points.Clear();
+            chart2.Series[1].Points.Clear();
+            chart2.Series[2].Points.Clear();
+            chart2.Series[3].Points.Clear();
+
+            puntosX.Clear();
+            puntosY.Clear();
+            puntosXNuevos.Clear();
+            puntosYNuevos.Clear();
+
+            salidasDeseadas.Clear();
+            valoresX.Clear();
+            valoresX = Vector<double>.Build.Dense(Generate.LinearSpaced(100, -10, 10));
+
+            cbxCero.Visible = true;
+            cbxUno.Visible = true;
+
+            bandera = false;
+        }
     }
 }
