@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +28,15 @@ namespace Perceptron
 
         private List<double> puntosX = new List<double>();
         private List<double> puntosY = new List<double>();
-        private List<double> salidasDeseadas = new List<double>();
+
+        private List<double> puntosXNuevos = new List<double>();
+        private List<double> puntosYNuevos = new List<double>();
+
+        private List<int> salidasDeseadas = new List<int>();
+
+        private Vector<double> valoresX = Vector<double>.Build.Dense(Generate.LinearSpaced(100, -10, 10));
+
+        private bool bandera = false;
 
 
         public Perceptron()
@@ -59,24 +68,52 @@ namespace Perceptron
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            Entrenamiento();
-            return;
+            if (!bandera)
+            {
+                Entrenamiento();
+                bandera = true;
+            }
+            else
+            {
+                chart2.Series[3].Points.Clear();
+                for (int i = 0; i < puntosXNuevos.Count; i++)
+                {
+                    if((w0 * bias) + (w1 * puntosXNuevos[i]) + (w2 * puntosYNuevos[i]) >= 0)
+                    {
+                        chart2.Series[0].Points.AddXY(puntosXNuevos[i], puntosYNuevos[i]);
+                    }
+                    else
+                    {
+                        chart2.Series[1].Points.AddXY(puntosXNuevos[i], puntosYNuevos[i]);
+                    }
+                }
+            }
         }
 
         private void chart2_MouseClick(object sender, MouseEventArgs e)
         {
-            puntosX.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
-            puntosY.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
-            if (cbxCero.Checked)
+            if (!bandera)
             {
-                salidasDeseadas.Add(0);
+                puntosX.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
+                puntosY.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
+                if (cbxCero.Checked)
+                {
+                    salidasDeseadas.Add(0);
+                }
+                if (cbxUno.Checked)
+                {
+                    salidasDeseadas.Add(1);
+                }
+
+                chart2.Series[3].Points.AddXY(puntosX.Last(), puntosY.Last());
             }
             else
             {
-                salidasDeseadas.Add(1);
-            }
+                puntosXNuevos.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
+                puntosYNuevos.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
 
-            chart2.Series[3].Points.AddXY(puntosX.Last(), puntosY.Last());
+                chart2.Series[3].Points.AddXY(puntosXNuevos.Last(), puntosYNuevos.Last());
+            }
         }
 
         private void cbxCero_MouseClick(object sender, MouseEventArgs e)
@@ -103,7 +140,7 @@ namespace Perceptron
                     if (error != 0)
                     {
                         Graficar();
-                        Thread.Sleep(5000);
+                        this.Refresh();
                         w0 += (factorAprendizaje * (error) * bias);
                         w1 += (factorAprendizaje * (error) * puntosX[j]);
                         w2 += (factorAprendizaje * (error) * puntosY[j]);
@@ -116,6 +153,9 @@ namespace Perceptron
 
         private void Graficar()
         {
+            chart2.Series[0].Points.Clear();
+            chart2.Series[1].Points.Clear();
+            chart2.Series[3].Points.Clear();
             for (int i = 0; i < puntosX.Count; i++)
             {
                 if((w0 * bias) + (w1 * puntosX[i]) + (w2 * puntosY[i]) >= 0)
@@ -127,12 +167,10 @@ namespace Perceptron
                     chart2.Series[1].Points.AddXY(puntosX[i], puntosY[i]);
                 }
 
-                var y1 = (-bias - w1 * (puntosX.Min()) / w2);
-                var y2 = (-bias - w1 * (puntosX.Max()) / w2);
+                Vector<double> valoresY = (-w1 * valoresX - bias) / w2;
 
                 chart2.Series[2].Points.Clear();
-                chart2.Series[2].Points.AddXY(puntosX.Min(), y1);
-                chart2.Series[2].Points.AddXY(puntosX.Max(), y2);
+                chart2.Series[2].Points.DataBindXY(valoresX.ToList(), valoresY.ToList());
             }
         }
 

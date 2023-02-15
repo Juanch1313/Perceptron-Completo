@@ -112,8 +112,6 @@
             // cbxCero
             // 
             this.cbxCero.AutoSize = true;
-            this.cbxCero.Checked = true;
-            this.cbxCero.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbxCero.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbxCero.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxCero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
