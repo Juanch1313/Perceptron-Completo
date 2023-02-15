@@ -16,13 +16,13 @@ namespace Perceptron
 {
     public partial class Perceptron : Form
     {
-        private static readonly Random random = new Random();
-        private double w0 = (double)random.NextDouble();
-        private double w1 = (double)random.NextDouble();
-        private double w2 = (double)random.NextDouble();
+        private readonly Random random = new Random();
+        private double w0 = 0;
+        private double w1 = 0;
+        private double w2 = 0;
         private readonly int bias = 1;
 
-        private readonly double factorAprendizaje = 0.4;
+        private readonly double factorAprendizaje = 0.4f;
         private readonly int epocas = 500;
 
 
@@ -70,6 +70,9 @@ namespace Perceptron
         {
             if (!bandera)
             {
+                w0 = random.NextDouble();
+                w1 = random.NextDouble();
+                w2 = random.NextDouble();
                 Entrenamiento();
                 bandera = true;
             }
@@ -136,7 +139,7 @@ namespace Perceptron
                 {
                     var y = (w0 * bias) + (w1 * puntosX[j]) + (w2 * puntosY[j]);
                     y = y >= 0 ? 1 : -1;
-                    var error = salidasDeseadas[j] - (y);
+                    var error = (salidasDeseadas[j]) - (y);
                     if (error != 0)
                     {
                         Graficar();
