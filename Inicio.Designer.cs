@@ -37,10 +37,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Perceptron));
             this.btnIngresar = new System.Windows.Forms.Button();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.cbxCero = new System.Windows.Forms.CheckBox();
-            this.cbxUno = new System.Windows.Forms.CheckBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.lbTexto = new System.Windows.Forms.Label();
+            this.lbValor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,37 +110,6 @@
             this.chart2.Text = "chart1";
             this.chart2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart2_MouseClick);
             // 
-            // cbxCero
-            // 
-            this.cbxCero.AutoSize = true;
-            this.cbxCero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbxCero.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxCero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.cbxCero.Location = new System.Drawing.Point(72, 140);
-            this.cbxCero.Name = "cbxCero";
-            this.cbxCero.Size = new System.Drawing.Size(91, 29);
-            this.cbxCero.TabIndex = 3;
-            this.cbxCero.Text = "Valor 0";
-            this.cbxCero.UseVisualStyleBackColor = true;
-            this.cbxCero.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxCero_MouseClick);
-            // 
-            // cbxUno
-            // 
-            this.cbxUno.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.cbxUno.AutoSize = true;
-            this.cbxUno.Checked = true;
-            this.cbxUno.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxUno.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbxUno.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxUno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.cbxUno.Location = new System.Drawing.Point(72, 194);
-            this.cbxUno.Name = "cbxUno";
-            this.cbxUno.Size = new System.Drawing.Size(88, 29);
-            this.cbxUno.TabIndex = 4;
-            this.cbxUno.Text = "Valor 1";
-            this.cbxUno.UseVisualStyleBackColor = true;
-            this.cbxUno.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxUno_MouseClick);
-            // 
             // btnLimpiar
             // 
             this.btnLimpiar.AutoSize = true;
@@ -168,16 +136,25 @@
             this.lbTexto.Size = new System.Drawing.Size(0, 20);
             this.lbTexto.TabIndex = 6;
             // 
+            // lbValor
+            // 
+            this.lbValor.AutoSize = true;
+            this.lbValor.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbValor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
+            this.lbValor.Location = new System.Drawing.Point(55, 145);
+            this.lbValor.Name = "lbValor";
+            this.lbValor.Size = new System.Drawing.Size(0, 21);
+            this.lbValor.TabIndex = 7;
+            // 
             // Perceptron
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(24)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(812, 458);
+            this.Controls.Add(this.lbValor);
             this.Controls.Add(this.lbTexto);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.cbxUno);
-            this.Controls.Add(this.cbxCero);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.btnIngresar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -192,10 +169,9 @@
         #endregion
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.CheckBox cbxCero;
-        private System.Windows.Forms.CheckBox cbxUno;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label lbTexto;
+        private System.Windows.Forms.Label lbValor;
     }
 }
 

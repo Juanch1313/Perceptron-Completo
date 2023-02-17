@@ -17,13 +17,12 @@ namespace Perceptron
     public partial class Perceptron : Form
     {
         private readonly Random random = new Random();
-        private double w0 = 0;
         private double w1 = 0;
         private double w2 = 0;
-        private readonly int bias = 1;
+        private double bias = 0;
 
-        private readonly double factorAprendizaje = 0.4f;
-        private readonly int epocas = 100;
+        private readonly double factorAprendizaje = 0.01f;
+        private readonly int epocas = 10;
 
 
         private List<double> puntosX = new List<double>();
@@ -33,8 +32,6 @@ namespace Perceptron
         private List<double> puntosYNuevos = new List<double>();
 
         private List<int> salidasDeseadas = new List<int>();
-
-        private Vector<double> valoresX = Vector<double>.Build.Dense(Generate.LinearSpaced(100, -10, 10));
 
         private bool bandera = false;
 
@@ -72,24 +69,23 @@ namespace Perceptron
         {
             if (!bandera)
             {
-                cbxCero.Visible = false;
-                cbxUno.Visible = false;
 
                 lbTexto.Text = "Entrenando...";
+                lbValor.Text = "";
+                btnIngresar.Enabled = false;
 
-                w0 = random.NextDouble();
+                bias = random.NextDouble();
                 w1 = random.NextDouble();
                 w2 = random.NextDouble();
                 Entrenamiento();
                 bandera = true;
-                lbTexto.Text = "Ya estoy entrenad@ \n puedes ingresar valores y \n yo los clasificare";
             }
             else
             {
                 chart2.Series[3].Points.Clear();
                 for (int i = 0; i < puntosXNuevos.Count; i++)
                 {
-                    if((w0 * bias) + (w1 * puntosXNuevos[i]) + (w2 * puntosYNuevos[i]) >= 0.5)
+                    if((bias) + (w1 * puntosXNuevos[i]) + (w2 * puntosYNuevos[i]) >= 0)
                     {
                         chart2.Series[0].Points.AddXY(puntosXNuevos[i], puntosYNuevos[i]);
                     }
@@ -107,69 +103,60 @@ namespace Perceptron
             {
                 puntosX.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
                 puntosY.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
-                if (cbxCero.Checked)
+                if (e.Button == MouseButtons.Right)
                 {
+                    lbValor.Text = "Valor 0 añadido";
                     salidasDeseadas.Add(0);
                 }
-                if (cbxUno.Checked)
+                if (e.Button == MouseButtons.Left)
                 {
+                    lbValor.Text = "Valor 1 añadido";
                     salidasDeseadas.Add(1);
                 }
-
                 chart2.Series[3].Points.AddXY(puntosX.Last(), puntosY.Last());
             }
             else
             {
+
                 puntosXNuevos.Add(chart2.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
                 puntosYNuevos.Add(chart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
 
                 chart2.Series[3].Points.AddXY(puntosXNuevos.Last(), puntosYNuevos.Last());
             }
         }
-
-        private void cbxCero_MouseClick(object sender, MouseEventArgs e)
-        {
-            cbxUno.Checked = false;
-            cbxCero.Checked = true;
-        }
-
-        private void cbxUno_MouseClick(object sender, MouseEventArgs e)
-        {
-            cbxUno.Checked = true;
-            cbxCero.Checked = false;
-        }
         #region Perceptron
-        private void Entrenamiento()
+        private async void Entrenamiento()
         {
+            double error = 0;
+            double y = 0;
             for (int i = 0; i < epocas; i++)
             {
                 for (int j = 0; j < puntosX.Count; j++)
                 {
-                    var y = (w0 * bias) + (w1 * puntosX[j]) + (w2 * puntosY[j]);
-                    y = y >= 0 ? 1 : -1;
-                    var error = (salidasDeseadas[j]) - (y);
-                    if (error != 0)
-                    {
-                        Graficar();
-                        Refresh();
-                        w0 += (factorAprendizaje * (error) * bias);
-                        w1 += (factorAprendizaje * (error) * puntosX[j]);
-                        w2 += (factorAprendizaje * (error) * puntosY[j]);
-                        break;
-                    }
-                    continue;
+                    y = bias + (w1 * puntosX[j]) + (w2 * puntosY[j]);
+                    y = y >  0 ? 1 : 0;
+                    error = salidasDeseadas[j] - y;
+                    Graficar();
+                    Refresh();
+                    await Task.Delay(1);
+                    bias += factorAprendizaje * error;
+                    w1 += factorAprendizaje * error * puntosX[j];
+                    w2 += factorAprendizaje * error * puntosY[j];
                 }
             }
+            lbTexto.Text = "Ya estoy entrenad@ \n puedes ingresar valores y \n yo los clasificare";
+            btnIngresar.Enabled = true;
         }
 
         private void Graficar()
         {
             chart2.Series[0].Points.Clear();
             chart2.Series[1].Points.Clear();
+            chart2.Series[2].Points.Clear();
             chart2.Series[3].Points.Clear();
             for (int i = 0; i < puntosX.Count; i++)
             {
-                if((w0 * bias) + (w1 * puntosX[i]) + (w2 * puntosY[i]) >= 0.5)
+                if(bias + (w1 * puntosX[i]) + (w2 * puntosY[i]) > 0)
                 {
                     chart2.Series[0].Points.AddXY(puntosX[i], puntosY[i]);
                 }
@@ -177,7 +164,7 @@ namespace Perceptron
                 {
                     chart2.Series[1].Points.AddXY(puntosX[i], puntosY[i]);
                 }
-
+                Vector<double> valoresX = Vector<double>.Build.Dense(Generate.LinearSpaced(100, -10, 10));
                 Vector<double> valoresY = (-w1 * valoresX - bias) / w2;
 
                 chart2.Series[2].Points.Clear();
@@ -200,11 +187,7 @@ namespace Perceptron
             puntosYNuevos.Clear();
 
             salidasDeseadas.Clear();
-            valoresX.Clear();
-            valoresX = Vector<double>.Build.Dense(Generate.LinearSpaced(100, -10, 10));
 
-            cbxCero.Visible = true;
-            cbxUno.Visible = true;
 
             bandera = false;
         }
