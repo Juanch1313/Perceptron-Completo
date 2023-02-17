@@ -59,7 +59,7 @@ namespace Perceptron
             //Colores
             chart2.Series[0].Color = Color.Green;
             chart2.Series[1].Color = Color.Red;
-            chart2.Series[2].Color = Color.Black;
+            chart2.Series[2].Color = Color.DarkBlue;
             chart2.Series[3].Color = Color.Blue;
 
             lbTexto.Text = "Primero dame los valores \n con los que entrenare";
@@ -127,15 +127,13 @@ namespace Perceptron
         #region Perceptron
         private async void Entrenamiento()
         {
-            double error = 0;
-            double y = 0;
             for (int i = 0; i < epocas; i++)
             {
                 for (int j = 0; j < puntosX.Count; j++)
                 {
-                    y = bias + (w1 * puntosX[j]) + (w2 * puntosY[j]);
+                    var y = bias + (w1 * puntosX[j]) + (w2 * puntosY[j]);
                     y = y >  0 ? 1 : 0;
-                    error = salidasDeseadas[j] - y;
+                    var error = salidasDeseadas[j] - y;
                     Graficar();
                     Refresh();
                     await Task.Delay(1);
