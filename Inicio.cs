@@ -21,7 +21,7 @@ namespace Perceptron
         private double w2 = 0;
         private double bias = 0;
 
-        private readonly double factorAprendizaje = 0.4f;
+        private readonly double factorAprendizaje = 0.04f;
         private readonly int epocas = 20;
 
 
