@@ -141,7 +141,7 @@
             this.lbValor.AutoSize = true;
             this.lbValor.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbValor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(164)))), ((int)(((byte)(115)))));
-            this.lbValor.Location = new System.Drawing.Point(55, 145);
+            this.lbValor.Location = new System.Drawing.Point(12, 141);
             this.lbValor.Name = "lbValor";
             this.lbValor.Size = new System.Drawing.Size(0, 21);
             this.lbValor.TabIndex = 7;

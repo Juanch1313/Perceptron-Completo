@@ -21,8 +21,8 @@ namespace Perceptron
         private double w2 = 0;
         private double bias = 0;
 
-        private readonly double factorAprendizaje = 0.01f;
-        private readonly int epocas = 10;
+        private readonly double factorAprendizaje = 0.4f;
+        private readonly int epocas = 20;
 
 
         private List<double> puntosX = new List<double>();
@@ -127,12 +127,12 @@ namespace Perceptron
         #region Perceptron
         private async void Entrenamiento()
         {
-            for (int i = 0; i < epocas; i++)
+            for (int i = 0; i <= epocas; i++)
             {
                 for (int j = 0; j < puntosX.Count; j++)
                 {
                     var y = bias + (w1 * puntosX[j]) + (w2 * puntosY[j]);
-                    y = y >  0 ? 1 : 0;
+                    y = y > 0 ? 1 : 0;
                     var error = salidasDeseadas[j] - y;
                     Graficar();
                     Refresh();
@@ -143,6 +143,7 @@ namespace Perceptron
                 }
             }
             lbTexto.Text = "Ya estoy entrenad@ \n puedes ingresar valores y \n yo los clasificare";
+            lbValor.Text = "Ya no hace falta dar clic\n derecho o izquiero";
             btnIngresar.Enabled = true;
         }
 
