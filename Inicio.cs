@@ -62,7 +62,7 @@ namespace Perceptron
             chart2.Series[2].Color = Color.DarkBlue;
             chart2.Series[3].Color = Color.Blue;
 
-            lbTexto.Text = "Primero dame los valores \n con los que entrenare";
+            lbTexto.Text = "Primero dame los valores \n con los que entrenare \n\n Clic izquierdo 1 \n Clic derecho 0";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -73,6 +73,7 @@ namespace Perceptron
                 lbTexto.Text = "Entrenando...";
                 lbValor.Text = "";
                 btnIngresar.Enabled = false;
+                btnLimpiar.Enabled = false;
 
                 bias = random.NextDouble();
                 w1 = random.NextDouble();
@@ -136,7 +137,7 @@ namespace Perceptron
                     var error = salidasDeseadas[j] - y;
                     Graficar();
                     Refresh();
-                    await Task.Delay(1);
+                    await Task.Delay(10);
                     bias += factorAprendizaje * error;
                     w1 += factorAprendizaje * error * puntosX[j];
                     w2 += factorAprendizaje * error * puntosY[j];
@@ -145,6 +146,7 @@ namespace Perceptron
             lbTexto.Text = "Ya estoy entrenad@ \n puedes ingresar valores y \n yo los clasificare";
             lbValor.Text = "Ya no hace falta dar clic\n derecho o izquiero";
             btnIngresar.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
         private void Graficar()
